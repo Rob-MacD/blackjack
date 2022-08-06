@@ -101,13 +101,7 @@ function hit(target) {
       playerCardsString += playerCards[i].value + ", ";
       playerSum += playerCards[i].value;
     }
-    createImage(
-      "player",
-      "images/" + nextCard.graphic + ".png",
-      54,
-      81,
-      nextCard.graphic
-    );
+    createImage("player", "images/" + nextCard.graphic + ".png", 54, 81, nextCard.graphic);
     document.getElementById("sum").textContent = "Sum: " + playerSum;
   } else {
     if (nextCard.value == 1 && dealerSum < 11) nextCard.value += 10;
@@ -117,13 +111,7 @@ function hit(target) {
       dealerCardsString += dealerCards[i].value + ", ";
       dealerSum += dealerCards[i].value;
     }
-    createImage(
-      "dealer",
-      "images/" + nextCard.graphic + ".png",
-      54,
-      81,
-      nextCard.graphic
-    );
+    createImage("dealer", "images/" + nextCard.graphic + ".png", 54, 81, nextCard.graphic);
   }
 
   shuffledDeck.splice(0, 1);
@@ -155,26 +143,21 @@ function createImage(target, src, width, height, alt) {
   img.height = height;
   img.alt = alt;
   img.id = "dealerCard" + dealerCards.length;
-  if (target == "player")
-    document.getElementById("playerCards").appendChild(img);
+  if (target == "player") document.getElementById("playerCards").appendChild(img);
   else {
-    if (dealerCards.length == 2) img.src = "images/!Back.png";
+    if (dealerCards.length == 2) img.src = "images/card-back.png";
     document.getElementById("dealerCards").appendChild(img);
   }
 }
 
 function stand() {
-  document.getElementById("dealerCard2").src =
-    "images/" + dealerCards[1].graphic + ".png";
+  document.getElementById("dealerCard2").src = "images/" + dealerCards[1].graphic + ".png";
   while (dealerSum < playerSum && dealerSum < 21) {
     hit("dealer");
   }
-  if (dealerSum > 21)
-    message = "The house busts. Would you like to play again?";
-  else if (dealerSum > playerSum && dealerSum < 22)
-    message = "The house wins. Would you like to play again?";
-  else if (dealerSum == playerSum)
-    message = "The game is tied! Would you like to play again?";
+  if (dealerSum > 21) message = "The house busts. Would you like to play again?";
+  else if (dealerSum > playerSum && dealerSum < 22) message = "The house wins. Would you like to play again?";
+  else if (dealerSum == playerSum) message = "The game is tied! Would you like to play again?";
   document.getElementById("message").textContent = message;
   document.getElementById("beginGameButton").style.display = "block";
   document.getElementById("hitStandButtons").style.display = "none";
